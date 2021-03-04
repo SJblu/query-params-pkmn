@@ -9,18 +9,27 @@ const app = express();
 const listaPkmns = require('./listaPkmns')
 
 
+app.get('/', (req, res) => {
+    // res.send('= = = MUNDO POKEMON = = =')
+    res.send(`
+    <h3> = = = Mundo Pokemon = = = </h3>
+    <p>Rota existente: '/pokemons'</p>
+    `)
+})
+
 // Query params
 // ex.: localhost:3000/usuarios?nome=Pineco
-app.get('/', (req, res) => {
+app.get('/pokemons', (req, res) => {
     const { name } = req.query;
     let listaRetorno = listaPkmns.filter(i => i.includes(name || ''));
     return res.json(listaRetorno)
 })
 
 // Route params
-app.get('/:pokemon', (req, res) => {
+app.get('/pokemons/:pokemon', (req, res) => {
     const { pokemon } = req.params
-    res.send(`${pokemon}, eu escolho você!!`)
+    // let listaRetorno = listaPkmns.filter(i => i.includes(name.toLowerCase() || ''));
+    res.send(`<p><strong>${pokemon}</strong>, eu escolho você!!</p>`)
 })
 
 
